@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>උතුම් වෙසක් මංගල්‍යයක් වේවා!</title>
+    <style>
+        /* මූලික සැකසුම් - වෘත්තීයමය සහ ශාන්ත පසුබිම */
+        body {
+            background: linear-gradient(rgba(10, 0, 30, 0.92), rgba(30, 0, 50, 0.9)), 
+                        url('https://images.unsplash.com/photo-1609137144813-2d4e82df43ca?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f0f0f0;
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* නම ඇතුළත් කරන කොටස */
+        .input-box {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            padding: 12px 25px;
+            border-radius: 30px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            display: flex;
+            gap: 12px;
+            box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
+
+        .input-box input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            padding: 6px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.5);
+            text-align: center;
+            transition: border-bottom-color 0.3s ease;
+        }
+
+        .input-box input:focus {
+            border-bottom-color: #ff9900;
+        }
+
+        .input-box button {
+            background: linear-gradient(45deg, #ff9900, #ffcc00);
+            border: none;
+            color: #1a052e;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .input-box button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
+        }
+
+        /* 3D කැරකෙන වෙසක් කූඩුව */
+        .lantern-container {
+            width: 100px;
+            height: 100px;
+            perspective: 500px;
+            margin-bottom: 20px;
+        }
+
+        .vesak-lantern {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateLantern 10s linear infinite;
+        }
+
+        /* වෙසක් කූඩුවේ හැඩතල (CSS 3D) */
+        .lantern-face {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 153, 0, 0.7);
+            border: 2.5px solid #ffcc00;
+            box-shadow: 0 0 25px rgba(255, 153, 0, 0.8), inset 0 0 10px rgba(255, 204, 0, 0.5);
+            border-radius: 5px; /* පොඩි වක්‍රයක් */
+        }
+
+        /* ත්‍රිමාණ ස්වභාවය ලබා දීම - නිවැරදිව අක්ෂ ගත කිරීම */
+        .face1 { transform: rotateY(0deg) translateZ(30px); }
+        .face2 { transform: rotateY(90deg) translateZ(30px); background: rgba(255, 180, 0, 0.7); }
+        .face3 { transform: rotateY(180deg) translateZ(30px); background: rgba(255, 153, 0, 0.7); }
+        .face4 { transform: rotateY(270deg) translateZ(30px); background: rgba(255, 210, 0, 0.7); }
+
+        @keyframes rotateLantern {
+            from { transform: rotateX(-5deg) rotateY(0deg); }
+            to { transform: rotateX(-5deg) rotateY(360deg); }
+        }
+
+        /* ප්‍රධාන වෙසක් කාඩ්පත (Glassmorphism Effect) */
+        .vesak-card {
+            background: rgba(20, 5, 35, 0.6);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(12px);
+            padding: 40px 35px;
+            border-radius: 28px;
+            text-align: center;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 
+                        inset 0 0 35px rgba(255, 215, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease-out;
+        }
+
+        .vesak-card:hover {
+            transform: scale(1.02);
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            background: linear-gradient(45deg, #ffe57f, #ffcc00, #ffe57f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 10px 0 22px 0;
+            text-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1.15rem;
+            line-height: 1.85;
+            color: #e0d0e0;
+            margin-bottom: 35px;
+            font-weight: 400;
+        }
+
+        .sender-section {
+            border-top: 1px solid rgba(255, 215, 0, 0.15);
+            padding-top: 22px;
+            width: 100%;
+        }
+
+        .sender-title {
+            font-size: 0.9rem;
+            color: #bbb;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .sender-name {
+            font-size: 1.5rem;
+            color: #ffcc00;
+            font-weight: 700;
+            text-shadow: 0 0 12px rgba(255, 204, 0, 0.6);
+        }
+
+        /* WhatsApp Share බොත්තම */
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 13px 32px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="input-box">
+        <input type="text" id="nameInput" placeholder="ඔබේ නම මෙතන ලියන්න" maxlength="25">
+        <button onclick="updateName()">සාදන්න</button>
+    </div>
+
+    <div class="vesak-card">
+        
+        <div class="lantern-container">
+            <div class="vesak-lantern">
+                <div class="lantern-face face1"></div>
+                <div class="lantern-face face2"></div>
+                <div class="lantern-face face3"></div>
+                <div class="lantern-face face4"></div>
+            </div>
+        </div>
+
+        <h1>උතුම් වෙසක් මංගල්‍යයක් වේවා!</h1>
+        <p>ලොව්තුරු බුදු පියාණන් වහන්සේගේ තෙමඟුල සිහිපත් කෙරෙන උතුම් වෙසක් මංගල්‍යයේදී ඔබ සැමට සැනසීම, ආලෝකය සහ පින්බර සිතුවිලි ප්‍රාර්ථනා කරමි!</p>
+        
+        <div class="sender-section">
+            <div class="sender-title">මෙත් සිතිවිලි පැතුම</div>
+            <div class="sender-name" id="displayName">ඔබේ නම</div>
+        </div>
+    </div>
+
+    <a href="#" id="waShareBtn" class="whatsapp-btn" onclick="shareOnWhatsApp(event)">
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12.04 2C6.5 2 2 6.5 2 12.04C2 13.81 2.46 15.54 3.34 17.06L2 22L7.11 20.66C8.57 21.46 10.22 21.88 11.96 21.88H12C17.5 21.88 22 17.38 22 11.84C22 9.16 20.96 6.64 19.05 4.74C17.15 2.84 14.71 1.88 12.04 2M12 3.82C14.16 3.82 16.18 4.66 17.71 6.19C19.24 7.72 20.08 9.74 20.08 11.9C20.08 16.35 16.44 20 12 20H11.96C10.45 20 8.96 19.6 7.65 18.83L7.34 18.65L4.3 19.45L5.11 16.47L4.9 16.15C4.06 14.81 3.62 13.26 3.62 11.67C3.62 7.22 7.26 3.82 12 3.82M9.13 7.82C8.94 7.82 8.63 7.89 8.38 8.16C8.13 8.44 7.42 9.11 7.42 10.47C7.42 11.83 8.41 13.14 8.55 13.33C8.69 13.5 10.5 16.41 13.35 17.5C14.03 17.77 14.56 17.95 14.97 18.08C15.66 18.3 16.29 18.27 16.78 18.2C17.33 18.12 18.47 17.5 18.71 16.83C18.95 16.16 18.95 15.59 18.88 15.47C18.81 15.36 18.62 15.3 18.33 15.15C18.05 15 16.67 14.32 16.41 14.23C16.16 14.13 15.97 14.09 15.79 14.37C15.6 14.64 15.06 15.28 14.9 15.47C14.73 15.65 14.56 15.68 14.28 15.53C14 15.39 13.04 15.08 11.9 14.06C11 13.26 10.4 12.28 10.22 11.97C10.03 11.69 10.2 11.54 10.35 11.4C10.48 11.27 10.64 11.06 10.79 10.89C10.93 10.71 10.97 10.59 11.07 10.39C11.16 10.19 11.11 10 11.04 9.87C10.97 9.73 10.33 8.18 10.06 7.53C9.8 6.9 9.53 6.98 9.33 6.97C9.14 6.97 8.93 6.82 9.13 7.82Z" />
+        </svg>
+        WhatsApp හරහා Share කරන්න
+    </a>
+
+    <script>
+        var currentName = "ඔබේ නම";
+
+        window.onload = function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var nameParam = urlParams.get('name');
+            
+            if (nameParam) {
+                currentName = decodeURIComponent(nameParam);
+                document.getElementById("displayName").innerText = currentName;
+                document.getElementById("nameInput").value = currentName;
+            }
+        };
+
+        function updateName() {
+            var inputVal = document.getElementById("nameInput").value;
+            if(inputVal.trim() !== "") {
+                currentName = inputVal;
+                document.getElementById("displayName").innerText = inputVal;
+            } else {
+                alert("කරුණාකර නමක් ඇතුළත් කරන්න!");
+            }
+        }
+
+        function shareOnWhatsApp(event) {
+            event.preventDefault();
+            var baseUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+            var shareUrl = baseUrl + "?name=" + encodeURIComponent(currentName);
+            
+            var message = "✨ *සුබ වෙසක් මංගල්‍යයක් වේවා!* ✨\n\n" + 
+                          "_" + currentName + "_ විසින් ඔබට එවන ලද විශේෂ වෙසක් සුබ පැතුම බලන්න පහත ලින්ක් එක ක්ලික් කරන්න. " +
+                          "ඔයාටත් ඔයාගේ නම දාලා මේක හදන්න පුළුවන්.\n\n" +
+                          "👉 " + shareUrl;
+            
+            var whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(message);
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+
+</body>
+</html>
